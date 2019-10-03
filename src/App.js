@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import bootstrap from '../src/assets/styles/bootstrap.module.css'
+import app from './App.module.css'
 
-function App() {
+import { Sidebar } from './components/Sidebar/Sidebar'
+import { Nav } from './components/Nav/Nav'
+import { PageContent } from './components/PageContent/PageContent'
+
+const App = () => {
+  const [toggled, setToggled] = useState(false)
+  const [title, setTitle] = useState('')
+
+  const toggleSidebar = () => setToggled(prevState => !prevState)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={bootstrap['d-flex']}>
+      <Sidebar toggled={toggled} onClick={setTitle} />
+      <div className={app['wrapper']}>
+        <Nav toggleSidebar={toggleSidebar} />
+        <PageContent title={title} />
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
