@@ -20,6 +20,18 @@
   margin-left: 0;
 }
 
+.outline-0:focus {
+  outline: none;
+}
+
+.link:hover {
+  color: #000;
+}
+
+.link:focus {
+  color: #000;
+}
+
 @media (min-width: 768px) {
   .wrapper {
     margin-left: 0;

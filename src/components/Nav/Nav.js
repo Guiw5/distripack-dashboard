@@ -1,21 +1,11 @@
 import React from 'react'
 
-import bootstrap from '../../assets/styles/bootstrap.module.css'
-import cx from 'classnames'
-
 export const Nav = props => (
-  <nav
-    className={cx([
-      bootstrap['navbar'],
-      bootstrap['navbar-light'],
-      bootstrap['bg-light'],
-      bootstrap['border-bottom']
-    ])}
-  >
-    <button
+  <nav className={'navbar navbar-light bg-light border-bottom'}>
+    <a
+      href="#"
       id="menu-toggle"
-      type="button"
-      className={bootstrap['navbar-toggler']}
+      className={'navbar-toggler'}
       onClick={props.toggleSidebar}
       data-toggle="collapse"
       data-target="#navbarSupportedContent"
@@ -23,7 +13,7 @@ export const Nav = props => (
       aria-expanded="false"
       aria-label="Toggle navigation"
     >
-      <span className={bootstrap['navbar-toggler-icon']}></span>
-    </button>
+      <span className={'navbar-toggler-icon'} />
+    </a>
   </nav>
 )

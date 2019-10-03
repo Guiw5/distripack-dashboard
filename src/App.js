@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import bootstrap from '../src/assets/styles/bootstrap.module.css'
+
 import app from './App.module.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 import { Sidebar } from './components/Sidebar/Sidebar'
 import { Nav } from './components/Nav/Nav'
@@ -13,8 +14,8 @@ const App = () => {
   const toggleSidebar = () => setToggled(prevState => !prevState)
 
   return (
-    <div className={bootstrap['d-flex']}>
-      <Sidebar toggled={toggled} onClick={setTitle} />
+    <div className={'d-flex'}>
+      <Sidebar toggled={toggled} brand={'Distripack'} onClick={setTitle} />
       <div className={app['wrapper']}>
         <Nav toggleSidebar={toggleSidebar} />
         <PageContent title={title} />
