@@ -1,7 +1,9 @@
 import React from 'react'
+// import styles from './Nav.module.css'
+import cx from 'classnames'
 
 export const Nav = props => (
-  <nav className={'navbar navbar-light bg-light border-bottom'}>
+  <nav className={cx('navbar', 'navbar-dark', 'border-bottom', 'bg-nav')}>
     <a
       href="#"
       id="menu-toggle"

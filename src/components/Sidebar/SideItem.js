@@ -1,58 +1,47 @@
-import React, { useState } from 'react'
-import Collapse from 'react-bootstrap/Collapse'
+import React from 'react'
+import { UncontrolledCollapse } from 'reactstrap'
 
 import sidebar from './Sidebar.module.css'
 import cx from 'classnames'
 
 export const SideItem = ({ title, data }) => {
-  const [open, setOpen] = useState(false)
-
   const { link, sublinks } = data
   const hasSublnks = sublinks.length > 0
-
-  const toggle = () => setOpen(prevState => !prevState)
+  const id = `${title.replace(' ', '')}`
   const loadView = () => console.log('abriendo vista', link)
+
+  if (!hasSublnks) return <Link onClick={loadView}>{title}</Link>
 
   return (
     <>
-      <Link onClick={hasSublnks ? toggle : loadView}>{title}</Link>
-      <Collapse in={open}>
-        <div className={cx('list-group', 'list-group-flush', 'bg-light')}>
-          {hasSublnks &&
-            sublinks.map(sublink => (
-              <SubLink key={sublink.title}>{sublink.title}</SubLink>
-            ))}
+      {/**This LinkToggler should have an #id to shows sublinks */}
+      <Link id={id}>{title}</Link>
+      <UncontrolledCollapse toggler={id}>
+        <div className={cx('list-group', 'list-group-flush')}>
+          {sublinks.map(sublink => (
+            <SubLink key={sublink.title}>{sublink.title}</SubLink>
+          ))}
         </div>
-      </Collapse>
+      </UncontrolledCollapse>
     </>
   )
 }
 
-export const Link = props => (
+export const Link = ({ id, sublink, onClick, children }) => (
   <a
+    id={id}
     href="#"
     className={cx([
       'list-group-item',
       'list-group-item-action',
+      'bg-dark',
+      sublink && 'pl-5',
       sidebar['link']
     ])}
-    onClick={props.onClick}
+    onClick={onClick}
   >
-    {props.children}
+    {children}
   </a>
 )
 
-export const SubLink = props => (
-  <a
-    href="#"
-    className={cx([
-      'list-group-item',
-      'list-group-item-action',
-      'pl-5',
-      sidebar['link']
-    ])}
-    onClick={props.onClick}
-  >
-    {props.children}
-  </a>
-)
+export const SubLink = props => <Link {...props} sublink />

@@ -4,36 +4,41 @@ import sidebar from './Sidebar.module.css'
 import cx from 'classnames'
 import { SideItem } from './SideItem'
 
-export const Sidebar = props => {
-  const data = {
-    Productos: {
-      link: '',
-      sublinks: [
-        { title: 'Lista de Precios', link: '' },
-        { title: 'Administrar Precios', link: '' }
-      ]
-    },
-    Pedidos: { link: '', sublinks: [] },
-    Clientes: { link: '', sublinks: [] },
-    Cuentas: { link: '', sublinks: [] },
-    Proveedores: { link: '', sublinks: [] },
-    Stock: { link: '', sublinks: [] }
-  }
+const data = {
+  Productos: {
+    link: 'products',
+    sublinks: [
+      { title: 'Lista de Precios', link: '' },
+      { title: 'Administrar Precios', link: '' }
+    ]
+  },
+  Pedidos: { link: 'orders', sublinks: [] },
+  Clientes: { link: 'clients', sublinks: [] },
+  Cuentas: {
+    link: 'accounts',
+    sublinks: [
+      { title: 'Cuentas Corrientes', link: '' },
+      { title: 'Administrar CC', link: '' }
+    ]
+  },
+  Proveedores: { link: 'suppliers', sublinks: [] },
+  Stock: { link: 'inventary', sublinks: [] }
+}
 
+export const Sidebar = props => {
   return (
     <div
       className={cx([
         sidebar['wrapper'],
-        'bg-light border-right',
+        'bg-dark',
+        'sidebar',
         props.toggled ? sidebar['toggled'] : ''
       ])}
     >
-      <div className={sidebar['heading']}>{props.brand}</div>
-      <div
-        className={cx([sidebar['list-group'], 'list-group-flush', 'bg-light'])}
-      >
-        {Object.keys(data).map(title => (
-          <SideItem key={title} title={title} data={data[title]} />
+      <div className={cx(sidebar['heading'], 'bg-nav')}>{props.brand}</div>
+      <div className={cx([sidebar['list-group'], 'list-group-flush'])}>
+        {Object.keys(data).map((title, index) => (
+          <SideItem key={index} title={title} data={data[title]} />
         ))}
       </div>
     </div>

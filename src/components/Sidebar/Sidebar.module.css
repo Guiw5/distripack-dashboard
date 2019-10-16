@@ -1,19 +1,22 @@
 .wrapper {
   min-height: 100vh;
-  margin-left: -15rem;
+  margin-left: -15.05rem;
+  border-right: 1px solid #00bfff;
   -webkit-transition: margin 0.25s ease-out;
   -moz-transition: margin 0.25s ease-out;
   -o-transition: margin 0.25s ease-out;
   transition: margin 0.25s ease-out;
+  margin-right: -1px;
 }
 
 .heading {
-  padding: 0.875rem 1.25rem;
+  padding: 0.85rem 1.25rem;
   font-size: 1.2rem;
+  color: #00bfff;
 }
 
 .list-group {
-  width: 15rem;
+  width: 15.05rem;
 }
 
 .toggled {
@@ -24,12 +27,13 @@
   outline: none;
 }
 
-.link:hover {
-  color: #000;
+.link {
+  color: #dedede;
 }
 
+.link:hover,
 .link:focus {
-  color: #000;
+  color: #00bfff;
 }
 
 @media (min-width: 768px) {
