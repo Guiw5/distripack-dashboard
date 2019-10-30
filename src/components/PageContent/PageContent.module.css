@@ -1,0 +1,9 @@
+/***
+* The :nth-child() and :nth-of-type() pseudo-classes allows you to select elements with a formula.
+* The syntax is :nth-child(an+b), where you replace a and b by numbers of your choice.
+* For instance, :nth-child(3n+1) selects the 1st, 4th, 7th etc. child. 
+**/
+
+.nonElipsis {
+  text-overflow: clip;
+}
