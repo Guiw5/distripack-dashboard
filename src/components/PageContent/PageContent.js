@@ -6,18 +6,15 @@ import {
   TableHeaderColumn,
   ShowSelectedOnlyButton
 } from 'react-bootstrap-table'
+
 import pageContent from './PageContent.module.css'
 
-// createShowSeletedOnlyButton = (onClick, showSelected) => {
-//   console.log('showSelected', showSelected)
-//   return (
-//     <ShowSelectedOnlyButton
-//       onClick={onClick}
-//       showAllText="Ver Todos"
-//       showOnlySelectText="Ver Seleccionados"
-//     />
-//   )
-// }
+const createShowSeletedOnlyButton = (onClick, showSelected) => (
+  <ShowSelectedOnlyButton
+    onClick={onClick}
+    showOnlySelectText={showSelected ? 'Ver Todos' : 'Ver Seleccionados'}
+  />
+)
 
 const PageContent = props => {
   const [products, setProducts] = useState([])
@@ -34,13 +31,7 @@ const PageContent = props => {
     fetchProducts()
   }, [])
 
-  const selectRow = {
-    mode: 'checkbox',
-    bgColor: '#00bfff',
-    hideSelectColumn: false,
-    clickToSelectAndEditCell: true,
-    showOnlySelected: true
-  }
+  const selectRow = {}
 
   return (
     <div className={'container-fluid'}>
@@ -53,7 +44,7 @@ const PageContent = props => {
         search
         pagination
         multiColumnSort
-        csvFileName={'listaPrecios'}
+        csvFileName={`listaPrecios-${Date.now().toLocaleString()}`}
         hover
         striped
         multiColumnSearch
@@ -61,15 +52,22 @@ const PageContent = props => {
           mode: 'click',
           blurToSave: true
         }}
-        selectRow={selectRow}
+        selectRow={{
+          mode: 'checkbox',
+          // bgColor: '#00bfff',
+          hideSelectColumn: true,
+          // clickToSelectAndEditCell: true,
+          showOnlySelected: true
+        }}
         searchPlaceholder={'Ingrese el código o descripción del producto'}
         version={'4'}
         options={{
-          sizePerPage: 10,
+          sizePerPage: 50,
           exportCSVText: 'Descargar Listado',
-          csvFileName: 'ListaPrecios'
-          // showSelectedOnlyBtn: createShowSeletedOnlyButton
+          csvFileName: 'ListaPrecios',
+          showSelectedOnlyBtn: createShowSeletedOnlyButton
         }}
+        // keyBoardNav={{ clickToNav: true, enterToEdit: true }}
       >
         <TableHeaderColumn
           headerAlign="center"
@@ -96,6 +94,7 @@ const PageContent = props => {
           width={'550'}
           csvHeader={'Descripción'}
           dataSort={true}
+          editable={false}
         >
           Descripción
         </TableHeaderColumn>
@@ -117,12 +116,6 @@ const PageContent = props => {
           dataSort={true}
           width={'80'}
           dataFormat={cell => {
-            //   try {
-            //     return `$${cell.toFixed(2)}`
-            //   } catch (error) {
-            //     console.log(error)
-            //   }
-            // }}
             return cell
           }}
         >
